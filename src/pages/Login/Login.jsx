@@ -17,10 +17,12 @@ function Login() {
       <div className="flex-row login-bg">
         <div className="form-container-login column">
           <div className="img-login">
-            <img
-              src="../src/imgs/frase-login.png"
-              alt="Birdy colecione suas histórias"
-            />
+            <Link to="/">
+              <img
+                src="../src/imgs/frase-login.png"
+                alt="Birdy colecione suas histórias"
+              />
+            </Link>
           </div>
 
           <h2>Login</h2>
