@@ -31,13 +31,13 @@ function AuthProvider({ children }) {
   );
 
   function login(user, token) {
-    dispatch({ type: "login", payload: { user, token } });
     localStorage.setItem("token", token);
+    dispatch({ type: "login", payload: { user, token } });
   }
 
   function logout() {
-    dispatch({ type: "logout" });
     localStorage.removeItem("token");
+    dispatch({ type: "logout" });
   }
 
   return (

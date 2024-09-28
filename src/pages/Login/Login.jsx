@@ -1,71 +1,60 @@
-import '../Login/Login.css'
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import "../Login/Login.css";
+import { useForm } from "react-hook-form";
+
+import { Link } from "react-router-dom";
+import { useLogin } from "../../services/useLogin";
 
 function Login() {
-    const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
-    const navigate = useNavigate()
+  const { register, handleSubmit } = useForm();
+  const loginMutation = useLogin();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+  const onSubmit = (data) => {
+    loginMutation.mutate(data);
+  };
 
-        try {
-            const response = await fetch('http://localhost:3000/usuarios')
-            const usuarios = await response.json()
+  return (
+    <>
+      <div className="flex-row login-bg">
+        <div className="form-container-login column">
+          <div className="img-login">
+            <img
+              src="../src/imgs/frase-login.png"
+              alt="Birdy colecione suas histórias"
+            />
+          </div>
 
-            const usuarioEncontrado = usuarios.find(usuario => usuario.email === email && usuario.senha === senha)
-
-            if (usuarioEncontrado) {
-                localStorage.setItem('autenticado', 'true')
-                localStorage.setItem('usuarioId', usuarioEncontrado.id)
-                localStorage.setItem('usuarioNome', usuarioEncontrado.nome)
-                navigate('/dashboard')
-            } else {
-                alert('E-mail ou senha incorretos')
-            }
-        } catch (error) {
-            console.error('Erro de autenticação: ', error)
-        }
-    }
-
-    return (
-        <>
-            <div className='flex-row login-bg'>
-                <div className='form-container-login column'>
-                    <div className='img-login'>
-                        <img src="../src/imgs/frase-login.png" alt="Birdy colecione suas histórias" />
-                    </div>
-
-                    <h2>Login</h2>
-                    <form onSubmit={handleSubmit} className='input-login column'>
-                        <input
-                            className='input-area'
-                            type="text"
-                            placeholder='E-mail'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <input
-                            className='input-area'
-                            type="password"
-                            placeholder='Senha'
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                        /> <br />
-                        <button type='submit' className='btn-style btn-yellow'>Entrar</button>
-                    </form>
-                    <div className='flex-row f-12'>
-                        <p className='space f-branco'>Ainda não tem cadastro?</p>
-                        <Link className='texto-link' to='/cadastro-usuario'>
-                            <span className='texto-link'>Cadastrar</span>
-                        </Link>
-                    </div>
-                </div>
-
-            </div>
-        </>
-    )
+          <h2>Login</h2>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="input-login column"
+          >
+            <input
+              className="input-area"
+              type="email"
+              placeholder="E-mail"
+              {...register("email")}
+            />
+            <input
+              className="input-area"
+              type="password"
+              placeholder="Senha"
+              {...register("password")}
+            />{" "}
+            <br />
+            <button type="submit" className="btn-style btn-yellow">
+              Entrar
+            </button>
+          </form>
+          <div className="flex-row f-12">
+            <p className="space f-branco">Ainda não tem cadastro?</p>
+            <Link className="texto-link" to="/cadastro-usuario">
+              <span className="texto-link">Cadastrar</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Login
+export default Login;

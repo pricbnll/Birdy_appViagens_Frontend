@@ -14,9 +14,10 @@ export const useLogin = () => {
       return response.data;
     },
     onSuccess: (data) => {
-      login(data.user, data.token);
+      login(data.user, data.Token);
+      console.log(data);
       toast.success("Login exitoso");
-      navigate("/app");
+      navigate("/dashboard");
     },
     onError: (error) => {
       if (error.response && error.response.status === 401) {
