@@ -1,4 +1,5 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import Home from '../pages/Home/Home'
 import Login from "../pages/Login/Login";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import CadastroUsuario from "../pages/CadastroUsuario/CadastroUsuario";
@@ -13,6 +14,7 @@ import { AuthProvider } from "../context/AuthContext";
 import ToasterComponent from "../util/ToasterComponent";
 
 function AppRoutes() {
+
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
@@ -20,6 +22,7 @@ function AppRoutes() {
         <Router>
           <Routes>
             <Route path="/" element={<Login />} />
+              <Route path='/home' element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
 
