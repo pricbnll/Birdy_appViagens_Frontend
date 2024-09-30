@@ -45,7 +45,7 @@ function CadastroUsuario() {
                 alert('Erro ao cadastrar usuario.')
             } else {
                 alert('Cadastro efetuado com sucesso!')
-                navigate('/')
+                navigate('/Login')
             }
 
         } catch (error) {

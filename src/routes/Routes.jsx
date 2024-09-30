@@ -21,8 +21,8 @@ function AppRoutes() {
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Login />} />
-              <Route path='/home' element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path='/home' element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
 
