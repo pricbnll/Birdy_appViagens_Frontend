@@ -1,4 +1,5 @@
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'// import Home from '../pages/Home'
+import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import CadastroUsuario from '../pages/CadastroUsuario/CadastroUsuario'
@@ -8,12 +9,14 @@ import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario'
 import AlterarDestino from '../pages/AlterarDestino/AlterarDestino'
 import PrivateRoute from '../auth/auth'
 
+
 function AppRoutes() {
     return (
         <>
             <Router>
                 <Routes>
-                    <Route path='/' element={<Login />} />
+                    <Route path='/' element={<Home />} />
+                    <Route path='/home' element={<Home />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/cadastro-usuario' element={<CadastroUsuario />} />
 
