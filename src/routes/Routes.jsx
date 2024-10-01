@@ -7,7 +7,7 @@ import CadastroDestino from "../pages/CadastroDestino/CadastroDestino";
 import ListaDestinos from "../pages/ListaDestinos/ListaDestinos";
 import PerfilUsuario from "../pages/PerfilUsuario/PerfilUsuario";
 import AlterarDestino from "../pages/AlterarDestino/AlterarDestino";
-import ProtectedRoute from "../pages/ProtectedRoute";
+// import ProtectedRoute from "../pages/ProtectedRoute";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "../context/AuthContext";
@@ -26,7 +26,13 @@ function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
 
-            <Route
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/cadastro-local" element={<CadastroDestino />} />
+            <Route path="/locais" element={<ListaDestinos />} />
+            <Route path="/perfil-usuario" element={<PerfilUsuario />} />
+            <Route path="/alterar-local/:id" element={<AlterarDestino />} />
+
+            {/* <Route
               path="/dashboard"
               element={<ProtectedRoute element={<Dashboard />} />}
             />
@@ -45,7 +51,7 @@ function AppRoutes() {
             <Route
               path="/alterar-local/:id"
               element={<ProtectedRoute element={<AlterarDestino />} />}
-            />
+            /> */}
           </Routes>
         </Router>
         <ToasterComponent />
