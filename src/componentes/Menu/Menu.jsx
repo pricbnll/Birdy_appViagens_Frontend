@@ -29,6 +29,10 @@ function Menu() {
                     <Link className='decor-none' to='/perfil-usuario'>
                         <p>Perfil do Usuário</p>
                     </Link>
+                    
+                    <Link className='decor-none' to='/cadastrar-local'>
+                        <p>Cadastrar Local</p>
+                    </Link>
                 </div>
 
                 <div>
