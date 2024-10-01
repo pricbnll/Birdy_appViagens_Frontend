@@ -24,7 +24,7 @@ function Login() {
       navigate("/dashboard");
     } catch (error) {
       console.error("Erro de autenticação: ", error);
-      toast.error("Erro de autenticação: E-mail ou senha incorretos");
+      toast.error("Erro de autenticação: E-mail ou senha incorretos.");
     }
   };
 
@@ -48,13 +48,13 @@ function Login() {
               className="input-area"
               type="text"
               placeholder="E-mail"
-              {...register("email", { required: "Campo Obrigatório" })}
+              {...register("email", { required: "Campo Obrigatório." })}
             />
             <input
               className="input-area"
               type="password"
               placeholder="Senha"
-              {...register("password", { required: "Campo Obrigatório" })}
+              {...register("password", { required: "Campo Obrigatório." })}
             />{" "}
             <br />
             <button type="submit" className="btn-style btn-yellow">
