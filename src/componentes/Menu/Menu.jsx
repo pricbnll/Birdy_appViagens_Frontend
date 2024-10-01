@@ -18,25 +18,24 @@ function Menu() {
                     <img className='logo-img' src="../src/imgs/birdy-icon.png" alt="Logo Birdy" />
                 </div>
                 <div>
-                    <Link className='decor-none' to='/dashboard'>
-                        <p className='text-menu'>Dashboard</p>
+                <Link className='decor-none' to='/dashboard'>
+                        <p>Pagina Inicial</p>
                     </Link>
-
-                    <Link className='decor-none' to='/locais'>
-                        <p>Locais Cadastrados</p>
-                    </Link>
-
                     <Link className='decor-none' to='/perfil-usuario'>
-                        <p>Perfil do Usuário</p>
+                        <p>Meu perfil</p>
                     </Link>
+
                     
-                    <Link className='decor-none' to='/cadastrar-local'>
-                        <p>Cadastrar Local</p>
+                    <Link className='decor-none' to='/locais'>
+                        <p>Meus destinos</p>
+                    </Link>
+                    <Link className='decor-none' to='/cadastro-local'>
+                        <p>Novo destino</p>
                     </Link>
                 </div>
 
                 <div>
-                    <p className='decor-none' onClick={handleLogout}>Sair</p>
+                    <p className='decor-none' onClick={handleLogout}><button type="button" className="btn btn-outline-light">Sair</button></p>
                 </div>
             </nav>
         </>
