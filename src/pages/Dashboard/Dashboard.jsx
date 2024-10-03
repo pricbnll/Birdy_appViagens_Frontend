@@ -48,12 +48,12 @@ function Dashboard() {
                     <div className="flex-row first-row">
                         <div className="flex-column first-column">
                             <div className="titulo">
-                                <h2>Olá, {usuario.nome}! Bem-vindo(a) ao Birdy!</h2>
+                                <h2>Olá, {usuario.nome} (Nome)! Bem-vindo!</h2>
                             </div>
-                            <div className="card">Destinos
+                            <div className="card">Meus destinos
                                 <div className="flex-row justify-content-between">
-                                    <img className="icon-card" src="../src/imgs/local-icon.png" alt="Icone Localização" />
                                     <span className="num-card">{contDestinos}</span>
+                                    <img className="icon-card" src="../src/imgs/local-icon.png" alt="Icone Localização" />
                                 </div>
                             </div>
                         </div>
