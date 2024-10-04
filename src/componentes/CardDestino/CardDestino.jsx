@@ -1,36 +1,28 @@
-import '../CardDestino/CardDestino.css'
+import "../CardDestino/CardDestino.css";
 
 function CardDestino({ nome, descricao, cidade, estado, pais, coordenadas, onMouseEnter, onMouseLeave, onClick }) {
     return (
         <>
             <div
-                className='card-container column card-destino'
+                className="card-container column card-destino"
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 onClick={onClick}
             >
-                <div className='row header-card'>
-                    <div className='col'>
+                <div className="row header-card">
+                    <div className="col destino-nome">
                         <h6>{nome}</h6>
                     </div>
+                    <div className="col destino-info">
+                        <p>{cidade}, {estado} - {pais}</p>
+                    </div>
                 </div>
-                <div className='row descricao-card'>
-                    <div className='col'>
+                <div className="row descricao-card">
+                    <div className="col">
                         <p>{descricao}</p>
-                    </div>
-                </div>
-                <div className='row footer-card'>
-                    <div className='col'>
-                        <h6>{cidade}</h6>
-                    </div>
-                    <div className='col'>
-                        <h6>{estado}</h6>
-                    </div>
-                    <div className='col'>
-                        <h6>{pais}</h6>
-                    </div>
-                    <div className='col'>
-                        <h6>{coordenadas}</h6>
+                        <button className="btn dashboard" onClick={onClick}>
+                            Exibir no mapa
+                        </button>
                     </div>
                 </div>
             </div>
@@ -38,4 +30,4 @@ function CardDestino({ nome, descricao, cidade, estado, pais, coordenadas, onMou
     )
 }
 
-export default CardDestino
+export default CardDestino;

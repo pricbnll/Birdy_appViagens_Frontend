@@ -8,7 +8,7 @@ function Menu() {
         localStorage.removeItem('usuarioNome')
         localStorage.removeItem('usuarioId')
 
-        navigate('/login')
+        navigate('/')
     }
 
     return (
