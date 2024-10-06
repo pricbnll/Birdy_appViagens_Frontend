@@ -58,7 +58,7 @@ function ListaDestinos() {
         <>
             <Menu></Menu>
             <div className="destinos-container">
-                <h2 className="titulo">Meus Locais</h2>
+                <h2 className="titulo">Meus Destinos</h2>
                 {destinos.length > 0 ? (
                     <table className="tabela-destinos">
                         <thead>
@@ -94,7 +94,7 @@ function ListaDestinos() {
                         </tbody>
                     </table>
                 ) : (
-                    <p>Nenhum local cadastrado.</p>
+                    <p>Nenhum destino cadastrado.</p>
                 )}
             </div>
         </>
