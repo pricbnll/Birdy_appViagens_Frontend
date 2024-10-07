@@ -44,12 +44,12 @@ function Home() {
                     </div>
                     <div className="dash-text-content">
                         <h1>Bem-vindo ao Birdy!</h1>
-                        <p>Descubra tudo sobre a ilha de Florianópolis com nossas informações exclusivas. Cadastre-se agora e desbloqueie conteúdos e funcionalidades especiais! </p>
+                        <p>Descubra tudo sobre a ilha de Florianópolis com nossas informações exclusivas. Cadastre-se agora e desbloqueie conteúdos e funcionalidades especiais!</p>
                     </div>
                 </div>
             </div>
             <div className="dash-row dash-third-row">
-                <div className="dash-column dash-col-cards">
+                <div className="dash-col-cards">
                     <div className="dash-card">
                         <div className="dash-card-content">
                             <h5 className="dash-card-title">Usuários</h5>
@@ -65,7 +65,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="dash-column dash-colum-login">
+                <div className="dash-colum-login">
                     <h2>Já é um Birdy? Que comece a diversão!</h2>
                     <button className="dash-btn-login">
                         <Link className="dash-texto-link" to="/login">
@@ -81,7 +81,7 @@ function Home() {
                 </div>
             </div>
             <div className="dash-row dash-fourth-row">
-                <div className="dash-column dash-card-info-list">
+                <div className="dash-card-info-list">
                     {destinos.slice(0, 3).map((destino) => (
                         <CardInfo
                             key={destino.id}
@@ -93,7 +93,7 @@ function Home() {
                         />
                     ))}
                 </div>
-                <div className="dash-column dash-map-container">
+                <div className="dash-map-container">
                     <MapaHome selectedDestino={selectedDestino} destinos={destinos} zoomLevel={zoomLevel} />
                 </div>
             </div>

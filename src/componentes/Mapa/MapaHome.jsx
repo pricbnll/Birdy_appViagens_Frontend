@@ -17,16 +17,19 @@ function ChangeView({ center, zoom }) {
 }
 
 function MapaHome({ selectedDestino, destinos, zoomLevel }) {
-    const [position, setPosition] = useState([-15.7942, -47.8822]);
+    const [position, setPosition] = useState([-15.7942, -47.8822]); 
     const [zoom, setZoom] = useState(4);
     const [highlightedDestino, setHighlightedDestino] = useState(null);
 
     useEffect(() => {
         if (selectedDestino) {
-            const [lat, lon] = selectedDestino.coordenadas.split(",").map(Number);
-            setPosition([lat, lon]);
-            setZoom(zoomLevel);
-            setHighlightedDestino(selectedDestino);
+            const lat = parseFloat(selectedDestino.coordenadas.lat);
+            const lon = parseFloat(selectedDestino.coordenadas.lng);
+            if (!isNaN(lat) && !isNaN(lon)) {
+                setPosition([lat, lon]);
+                setZoom(zoomLevel);
+                setHighlightedDestino(selectedDestino);
+            }
         } else {
             setZoom(4);
             setHighlightedDestino(null);
@@ -35,7 +38,7 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
 
     const defaultIcon = new L.Icon({
         iconUrl: iconUrl,
-        iconSize: [20, 30],
+        iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
@@ -43,7 +46,7 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
 
     const highlightedIcon = new L.Icon({
         iconUrl: highlightedIconUrl,
-        iconSize: [20, 30],
+        iconSize: [30, 46],
         iconAnchor: [15, 46],
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
@@ -56,7 +59,9 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             {destinos.map((destino) => {
-                const [lat, lon] = destino.coordenadas.split(",").map(Number);
+                const lat = parseFloat(destino.coordenadas.lat);
+                const lon = parseFloat(destino.coordenadas.lng);
+                if (isNaN(lat) || isNaN(lon)) return null; 
                 return (
                     <Marker
                         key={destino.id}
