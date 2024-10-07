@@ -3,6 +3,7 @@
     width: 100vw;
     height: 100vh;
     background-color: antiquewhite;
+   
 }
 
 .menu {
@@ -37,10 +38,11 @@
 }
 
 .titulo h2 {
-    font-size: 48px;
-    color: #333;
+    font-size: 32px;
+    color:#504d2c;
     margin-bottom: 30px;
     margin-left: 300px;
+    padding-top: 20px;
 }
 
 .card {
@@ -48,7 +50,7 @@
     height: 120px;
     font-size: 30px;
     background-color: #504d2c;
-    color: #e0e0e0;
+    color:#eab741;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -56,27 +58,27 @@
     justify-content: space-between;
 }
 
-
-
 .num-card {
     font-size: 50px;
     margin-left: 40px;
-    margin-bottom: 40px;
-    color: #e0e0e0;
+    color:#eab741;
+    padding-bottom: 20px;
+    margin-top: 0;
 }
 
 .icon-card {
     width: 50px;
     height: 50px;
+   
 }
 
 .map-container {
     flex: 2;
     height: 300px; 
     background-color: #e0e0e0;
-    margin-top: 40px;
-    margin-left: 10px;
-    margin-right: 300px;
+    margin-top: 35px;
+    margin-left: 5px;
+    margin-right: 200px;
 }
 
 .leaflet-container {
@@ -88,7 +90,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
-    max-height: 60vh; 
+    max-height: 55vh; 
+    width: 90%;
     overflow-y: auto;
     overflow-x: hidden; 
     padding: 10px;
