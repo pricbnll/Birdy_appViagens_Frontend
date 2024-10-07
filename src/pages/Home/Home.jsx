@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import '../Home/Home.css';
-import contaDados from '../../util/contaDados';
+// import contaDados from '../../util/contaDados';
 import MapaHome from '../../componentes/Mapa/MapaHome';
 import Sidebar from '../../componentes/Sidebar/Sidebar';
 import CardInfo from '../../componentes/CardInfo/CardInfo';
 import { Link } from 'react-router-dom';
-
+import api from '../../services/ApiUrl'
 function Home() {
-    const [contUsuarios, setContUsuarios] = useState(0);
+    const [contUsuariosAtivos, setContUsuariosAtivos] = useState(0);
     const [contDestinos, setContDestinos] = useState(0);
     const [destinos, setDestinos] = useState([]);
     const [selectedDestino, setSelectedDestino] = useState(null);
@@ -15,17 +15,45 @@ function Home() {
 
     useEffect(() => {
         async function fetchData() {
-            const { contUsuarios, contDestinos } = await contaDados();
-            setContUsuarios(contUsuarios);
-            setContDestinos(contDestinos);
+            // Chamada para a API que conta os usuários ativos
+            const responseUsuariosAtivos = await api.get('/usuarios/totalUsuariosAtivos'); 
+            const usuariosAtivosData = responseUsuariosAtivos.data; // Acesse os dados
+            setContUsuariosAtivos(usuariosAtivosData.contUsuariosAtivos); // Atualiza o estado
 
-            const response = await fetch('http://localhost:3000/destinos');
-            const data = await response.json();
+            // Chamada para contar destinos (se necessário)
+            const responseContDestinos = await api.get('/destinos/count'); // Ajuste a rota para a contagem de destinos
+            const contDestinosData = responseContDestinos.data; // Acesse os dados
+            setContDestinos(contDestinosData.contDestinos); // Atualiza o estado
+
+            // Chamada para obter a lista de destinos
+            const responseDestinos = await api.get('http://localhost:3000/destinos');
+            const data = await responseDestinos.data; // Use response.data para Axios
             setDestinos(data);
         }
 
         fetchData();
     }, []);
+
+// function Home() {
+//     const [contUsuariosAtivos, setcontUsuariosAtivos] = useState(0);
+//     const [contDestinos, setContDestinos] = useState(0);
+//     const [destinos, setDestinos] = useState([]);
+//     const [selectedDestino, setSelectedDestino] = useState(null);
+//     const [zoomLevel, setZoomLevel] = useState(4);
+
+//     useEffect(() => {
+//         async function fetchData() {
+//             const { contUsuariosAtivos, contDestinos } = await contaDados();
+//             setcontUsuariosAtivos(contUsuariosAtivos);
+//             setContDestinos(contDestinos);
+
+//             const response = await fetch('http://localhost:3000/destinos');
+//             const data = await response.json();
+//             setDestinos(data);
+//         }
+
+//         fetchData();
+//     }, []);
 
     const handleCardClick = (destino) => {
         setSelectedDestino(destino);
@@ -54,7 +82,7 @@ function Home() {
                         <div className="dash-card-content">
                             <h5 className="dash-card-title">Usuários</h5>
                             <img className="dash-icon-card" src="../src/imgs/user-icon.png" alt="Icon Usuário" />
-                            <span className="dash-num-card">{contUsuarios}</span>
+                            <span className="dash-num-card">{contUsuariosAtivos}</span>
                         </div>
                     </div>
                     <div className="dash-card">
