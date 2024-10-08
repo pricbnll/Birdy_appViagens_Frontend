@@ -22,7 +22,7 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
     const [highlightedDestino, setHighlightedDestino] = useState(null);
 
     useEffect(() => {
-        if (selectedDestino) {
+        if (selectedDestino && selectedDestino.coordenadas) {
             const [lat, lon] = selectedDestino.coordenadas.split(",").map(Number);
             setPosition([lat, lon]);
             setZoom(zoomLevel);
@@ -31,7 +31,7 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
             setZoom(4);
             setHighlightedDestino(null);
         }
-    }, [selectedDestino, zoomLevel]);
+    }, [selectedDestino, zoomLevel, destinos]);
 
     const defaultIcon = new L.Icon({
         iconUrl: iconUrl,
@@ -53,27 +53,30 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
         <MapContainer center={position} zoom={zoom} className="dash-map-container">
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
             />
-            {destinos.map((destino) => {
-                const [lat, lon] = destino.coordenadas.split(",").map(Number);
-                return (
-                    <Marker
-                        key={destino.id}
-                        position={[lat, lon]}
-                        icon={
-                            destino.id === highlightedDestino?.id
-                                ? highlightedIcon
-                                : defaultIcon
-                        }
-                    >
-                        <Popup>
-                            <strong>{destino.nome}</strong>
-                            <br />
-                            {destino.cidade}, {destino.estado}
-                        </Popup>
-                    </Marker>
-                );
+            {destinos && destinos.map((destino) => {
+                if (destino.coordenadas) {
+                    const [lat, lon] = destino.coordenadas.split(",").map(Number);
+                    return (
+                        <Marker
+                            key={destino.id}
+                            position={[lat, lon]}
+                            icon={
+                                destino.id === highlightedDestino?.id
+                                    ? highlightedIcon
+                                    : defaultIcon
+                            }
+                        >
+                            <Popup>
+                                <strong>{destino.nome}</strong>
+                                <br />
+                                {destino.cidade}, {destino.estado}
+                            </Popup>
+                        </Marker>
+                    );
+                }
+                return null; 
             })}
             <ChangeView center={position} zoom={zoom} />
         </MapContainer>

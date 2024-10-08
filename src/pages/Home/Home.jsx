@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../Home/Home.css";
-// import MapaHome from "../../componentes/Mapa/MapaHome";
+import MapaHome from "../../componentes/Mapa/MapaHome";
 import Sidebar from "../../componentes/Sidebar/Sidebar";
 import CardInfo from "../../componentes/CardInfo/CardInfo";
 import { Link } from "react-router-dom";
@@ -9,8 +9,8 @@ function Home() {
   const [contUsuariosAtivos, setContUsuariosAtivos] = useState(0);
   const [contDestinos, setContDestinos] = useState(0);
   const [destinos, setDestinos] = useState([]);
-//   const [selectedDestino, setSelectedDestino] = useState(null);
-//   const [zoomLevel, setZoomLevel] = useState(4);
+  const [selectedDestino, setSelectedDestino] = useState(null);
+  const [zoomLevel, setZoomLevel] = useState(4);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,10 +30,10 @@ function Home() {
     fetchData();
     }, []);
 
-//   const handleCardClick = (destino) => {
-//     setSelectedDestino(destino);
-//     setZoomLevel(10);
-//   };
+  const handleCardClick = (destino) => {
+    setSelectedDestino(destino);
+    setZoomLevel(10);
+  };
 
   return (
     <div className="dash-app-container">
@@ -101,23 +101,26 @@ function Home() {
       </div>
       <div className="dash-row dash-fourth-row">
         <div className="dash-column dash-card-info-list">
-          {destinos.slice(0, 3).map((destino) => (
+          {destinos.map((destino) => (
             <CardInfo
               key={destino.id}
               nome={destino.nome}
-              coordenadas_geo={destino.coordenadas_geo}
+              lat={destino.lat}
+              lon={destino.lon}
+            //   latitude={destino.coordenadas.lat}
+            //   longitude={destino.coordenadas.lon}
               descricao={destino.descricao}
-            //   onClick={() => handleCardClick(destino)}
+              onClick={() => handleCardClick(destino)}
             />
           ))}
         </div>
-        {/* <div className="dash-column dash-map-container">
+        <div className="dash-column dash-map-container">
           <MapaHome
             selectedDestino={selectedDestino}
             destinos={destinos}
             zoomLevel={zoomLevel}
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );
