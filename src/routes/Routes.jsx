@@ -21,12 +21,6 @@ function AppRoutes() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
 
-          {/* <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/cadastro-local" element={<CadastroDestino />} />
-            <Route path="/locais" element={<ListaDestinos />} />
-            <Route path="/perfil-usuario" element={<PerfilUsuario />} />
-            <Route path="/alterar-local/:id" element={<AlterarDestino />} /> */}
-
           <Route
             path="/dashboard"
             element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>}
