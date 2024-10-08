@@ -15,18 +15,18 @@ function Home() {
 
     useEffect(() => {
         async function fetchData() {
-            // Chamada para a API que conta os usuários ativos
-            const responseUsuariosAtivos = await api.get('/usuarios/totalUsuariosAtivos'); 
-            const usuariosAtivosData = responseUsuariosAtivos.data; // Acesse os dados
-            setContUsuariosAtivos(usuariosAtivosData.contUsuariosAtivos); // Atualiza o estado
+            const responseUsuariosAtivos = await api.get('/home/totalUsuariosAtivos'); 
+                const usuariosAtivosData = responseUsuariosAtivos.data.usuariosAtivos; 
+                setContUsuariosAtivos(usuariosAtivosData.count); 
+
 
             // Chamada para contar destinos (se necessário)
-            const responseContDestinos = await api.get('/destinos/count'); // Ajuste a rota para a contagem de destinos
+            const responseContDestinos = await api.get('/destinos/totalDestinos'); // Ajuste a rota para a contagem de destinos
             const contDestinosData = responseContDestinos.data; // Acesse os dados
             setContDestinos(contDestinosData.contDestinos); // Atualiza o estado
 
             // Chamada para obter a lista de destinos
-            const responseDestinos = await api.get('http://localhost:3000/destinos');
+            const responseDestinos = await api.get('/destinos');
             const data = await responseDestinos.data; // Use response.data para Axios
             setDestinos(data);
         }
