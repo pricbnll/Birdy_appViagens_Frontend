@@ -2,7 +2,9 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import buscaCep from "../../util/buscaCep";
 import { useNavigate } from "react-router-dom";
-import api from "../../services/ApiUrl";
+import checkCpfUnico from "../../util/cpfUnico"
+import checkEmailUnico from "../../util/emailUnico";
+import api from "../../services/ApiUrl"
 
 function CadastroUsuario() {
   const { register, handleSubmit, setValue, formState } = useForm();
@@ -22,8 +24,8 @@ function CadastroUsuario() {
   };
 
   async function criarUsuario(data) {
-      try {
-        const response = await api.post("/usuarios", data); 
+    try {
+      const response = await api.post("/usuarios", data);
       console.log("Requisição enviada com sucesso!");
       console.log(response.data);
 
@@ -32,6 +34,17 @@ function CadastroUsuario() {
       } else {
         alert("Cadastro efetuado com sucesso!");
         navigate("/Login");
+      }
+      const cpfUnico = await checkCpfUnico(data.cpf);
+      if (!cpfUnico) {
+        alert("Este CPF já foi cadastrado");
+        return;
+      }
+
+      const emailUnico = await checkEmailUnico(data.email);
+      if (!emailUnico) {
+        alert("Este E-mail já foi cadastrado");
+        return;
       }
     } catch (error) {
       console.error("Erro no cadastro:", error);
@@ -71,7 +84,10 @@ function CadastroUsuario() {
                   <span className="error-message">
                     {formState.errors?.sexo?.message}
                   </span>
-                  <select className="input-area w-100" {...register("sexo")}>
+                  <select
+                    className="input-area w-100"
+                    {...register("sexo", { required: "Campo Obrigatório" })}
+                  >
                     <option value="">Sexo</option>
                     <option value="feminino">Feminino</option>
                     <option value="masculino">Masculino</option>
