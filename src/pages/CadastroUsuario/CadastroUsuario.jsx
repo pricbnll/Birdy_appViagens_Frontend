@@ -2,8 +2,6 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import buscaCep from "../../util/buscaCep";
 import { useNavigate } from "react-router-dom";
-// import checkCpfUnico from "../../util/cpfUnico";
-// import checkEmailUnico from "../../util/emailUnico";
 import api from "../../services/ApiUrl";
 
 function CadastroUsuario() {
@@ -24,8 +22,8 @@ function CadastroUsuario() {
   };
 
   async function criarUsuario(data) {
-    try {
-      const response = await api.post("/usuarios", data); 
+      try {
+        const response = await api.post("/usuarios", data); 
       console.log("Requisição enviada com sucesso!");
       console.log(response.data);
 
@@ -93,13 +91,13 @@ function CadastroUsuario() {
                 </div>
                 <div className="col-4">
                   <span className="error-message">
-                    {formState.errors?.data_nasc?.message}
+                    {formState.errors?.data_nascimento?.message}
                   </span>
                   <input
                     className="input-area w-100"
                     type="date"
                     placeholder="Data de Nascimento"
-                    {...register("data_nasc", {
+                    {...register("data_nascimento", {
                       required: "Campo Obrigatório",
                     })}
                   />
@@ -120,13 +118,13 @@ function CadastroUsuario() {
                 </div>
                 <div className="col-4">
                   <span className="error-message">
-                    {formState.errors?.senha?.message}
+                    {formState.errors?.password?.message}
                   </span>
                   <input
                     className="input-area w-100"
                     type="text"
                     placeholder="Senha"
-                    {...register("senha", { required: "Campo Obrigatório" })}
+                    {...register("password", { required: "Campo Obrigatório" })}
                   />
                 </div>
               </div>
