@@ -3,11 +3,26 @@
     background-color: #504d2c;
     width: 200px;
     padding-top: 50px;
-    padding-left: 30px;
+    padding-left: 20px;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .nav-bg {
+        box-sizing: border-box;
+        background-color: #504d2c;
+        width: 100px;
+        padding-top: 50px;
+        padding-left: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }    
 }
 
 .nav-bg p {
@@ -15,7 +30,22 @@
     color: white;
 }
 
+@media (max-width: 768px) {
+    .nav-bg p {
+        margin: 15px 0;
+        color: white;
+    }
+}
+
 .logo-img {
     margin-left: 15px;
     margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        margin-left: 2px;
+        margin-bottom: 20px;
+        width: 50px;
+    }
 }

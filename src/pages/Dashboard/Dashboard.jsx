@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react' 
+import { useEffect, useState } from 'react'
 import '../Dashboard/Dashboard.css'
 import Menu from '../../componentes/Menu/Menu'
 import contaDados from '../../util/contaDados'
@@ -7,7 +7,7 @@ import Mapa from '../../componentes/Mapa/Mapa'
 
 function Dashboard() {
     const [contUsuarios, setContUsuarios] = useState(0)
-    const [usuario, setUsuario] = useState({ nome: ''})
+    const [usuario, setUsuario] = useState({ nome: '' })
     const [contDestinos, setContDestinos] = useState(0)
     const [destinos, setDestinos] = useState([])
     const [selectedDestino, setSelectedDestino] = useState(null)
@@ -40,6 +40,10 @@ function Dashboard() {
         setZoomLevel(10)
     }
 
+    
+    const nomeCompleto = localStorage.getItem("usuarioNome");
+    const primeiroNome = nomeCompleto.split(" ")[0];
+
     return (
         <>
             <div className="dashboard-container">
@@ -48,7 +52,7 @@ function Dashboard() {
                     <div className="flex-row first-row">
                         <div className="flex-column first-column">
                             <div className="titulo">
-                                <h2>Olá, {usuario.nome} (Nome)! Bem-vindo!</h2>
+                                <h2>Olá, {primeiroNome}! Bem-vindo!</h2>
                             </div>
                             <div className="card">Meus destinos
                                 <div className="flex-row justify-content-between">
