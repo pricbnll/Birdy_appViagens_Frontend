@@ -1,4 +1,4 @@
-.map-container {        
+ .map-container {        
     position: fixed;
     top: 20px;
     right: 10px;
@@ -10,3 +10,13 @@
     width: 500px;
     height: 220px;  
 }
+
+
+@media (max-width: 768px) {
+    .map-container {
+        width: 100%;
+        height: 300px;
+       
+    }
+} 
+
