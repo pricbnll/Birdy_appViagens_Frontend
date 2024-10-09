@@ -17,9 +17,14 @@ function Login() {
         password: data.password,
       });
 
-      const token = response.data.Token;
+      const { token, usuario } = response.data;
 
-      login({ email: data.email }, token);
+      localStorage.setItem("token", token);
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+      login(usuario, token)
+
+      // const token = response.data.Token;
+      // login({ email: data.email }, token);
 
       navigate("/dashboard");
     } catch (error) {

@@ -6,58 +6,47 @@ import Mapa from "../../componentes/Mapa/Mapa";
 import api from "../../services/ApiUrl";
 
 function Dashboard() {
-  const [usuario, setUsuario] = useState({ nome: "Nome do Viajante", id: null });
+  const [usuario, setUsuario] = useState({
+    nome: "Nome do Viajante",
+    id: null,
+  });
   const [countDestinos, setCountDestinos] = useState(0);
   const [destinos, setDestinos] = useState([]);
   const [selectedDestino, setSelectedDestino] = useState(null);
   const [zoomLevel, setZoomLevel] = useState(4);
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        console.log(token)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token); 
 
-        // Função para extrair o payload do token JWT
-        const extrairInformacoesDoToken = (token) => {
-            if (!token) return null;
-            const base64Url = token.split('.')[1]; // Pega a segunda parte do token
-            const base64 = window.atob(base64Url); // Decodifica a parte base64 (Payload)
-            return JSON.parse(base64); // Retorna o payload decodificado
-        };
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    console.log(usuario);
 
-        const payload = extrairInformacoesDoToken(token);
-        console.log(payload)
-
-        if (payload) {
-            const usuarioNome = payload?.nome || "Nome do Viajante"; //.slice[0]
-            const usuarioId = payload?.sub || null;
-
-            // Define o nome e id do usuário no estado
-            setUsuario({ nome: usuarioNome, id: usuarioId });
-        }
+    setUsuario(usuario.nome)
 
     async function fetchData() {
-        try {
-            const usuarioId = usuario.id; 
+      try {
 
-            if (!usuarioId) {
-              console.error("Usuário ID não encontrado");
-              return;
-            }
-            
-            const responseCountDestinos = await api.get(
-              `/destinos/destinos_usuario/${usuarioId}`
-              
-            );
-            const totalDestinoIdData = responseCountDestinos.data.totalDestinoId;
-            setCountDestinos(totalDestinoIdData.count);
-            setDestinos(totalDestinosIdData.rows);
-    
-        } catch (error) {
-            console.error("Erro ao buscar destinos:", error);
+        if (!usuario.id) {
+          console.error("Usuário ID não encontrado");
+          return;
         }
+
+        const responseCountDestinos = await api.get(
+          `/destinos/destinos_usuario/${usuario.id}`
+        );
+        console.log(usuario.id)
+        const totalDestinoIdData = responseCountDestinos.data;
+        setCountDestinos(totalDestinoIdData.count);
+        console.log(totalDestinoIdData.count)
+        setDestinos(totalDestinoIdData.rows);
+        console.log(totalDestinoIdData.rows)
+      } catch (error) {
+        console.error("Erro ao buscar destinos:", error);
+      }
     }
     fetchData();
-}, [usuario.id]);
+  }, [usuario.id]);
 
   const handleMouseEnter = (destino) => {
     setSelectedDestino(destino);
@@ -77,7 +66,7 @@ function Dashboard() {
           <div className="flex-row first-row">
             <div className="flex-column first-column">
               <div className="titulo">
-                {/* <h2>Olá, {usuarioNome}! Bem-vindo(a) ao Birdy!</h2> */}
+                <h2>Olá, Viajante! Bem-vindo(a) ao Birdy!</h2>
               </div>
               <div className="card">
                 Destinos
