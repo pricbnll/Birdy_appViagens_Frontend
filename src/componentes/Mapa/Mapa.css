@@ -1,7 +1,7 @@
-.map-container {        
+ .map-container {        
     position: fixed;
     top: 20px;
-    right: 50px;
+    right: 10px;
     z-index: 1000;
     background-color: white;
     border: 1px solid #ccc;
@@ -10,3 +10,13 @@
     width: 500px;
     height: 220px;  
 }
+
+
+@media (max-width: 768px) {
+    .map-container {
+        width: 100%;
+        height: 300px;
+       
+    }
+} 
+

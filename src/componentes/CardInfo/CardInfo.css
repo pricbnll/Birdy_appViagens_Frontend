@@ -7,7 +7,6 @@
     border-radius: 4px;
     margin-bottom: 20px;
     background-color: #eab741;
-    transition: background-color 0.3s;
 }
 
 .dash-card-info-header {
@@ -36,13 +35,6 @@
     background-color: #9b3b3b;
 }
 
-.dash-card-info-column p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-    
-}
-
 .dash-card-info-img {
     margin-top: 10px;
     width: 100%;
@@ -50,6 +42,8 @@
     border-radius: 4px;
 }
 
-.dash-card-info-container:hover {
-    background-color: #e2e2e2;
+@media (max-width: 768px) {
+    .dash-card-info-container {
+        width: 100%;
+    }
 }

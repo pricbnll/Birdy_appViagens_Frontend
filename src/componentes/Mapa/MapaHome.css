@@ -1,4 +1,4 @@
-   .dash-map-container {
+.dash-map-container {
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -6,4 +6,33 @@
     height: 100%;
     max-height: 400px;
     border-radius: 8px;
+}
+
+
+@media (min-width: 1200px) {
+    .dash-map-container {
+        max-height: 450px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .dash-map-container {
+        max-height: 400px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .dash-map-container {
+        max-height: 300px;
+        height: 300px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .dash-map-container {
+        height: 250px;
+    }
 }

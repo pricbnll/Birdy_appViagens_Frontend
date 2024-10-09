@@ -81,6 +81,7 @@ function Home() {
                 alt="Icon Destinos"
               />
               <span className="dash-num-card">{contDestinos}</span>
+
             </div>
           </div>
         </div>

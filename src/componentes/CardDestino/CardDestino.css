@@ -10,14 +10,10 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
     background-color: #eab741;
     transition: background-color 0.3s ease;
-}
-
-.card-container:hover {
-    background-color: antiquewhite;
 }
 
 .header-card {
@@ -34,7 +30,7 @@
 .header-card h6 {
     margin: 0;
     font-size: 18px;
-    color: #504d2c;
+    color: #7b2b2a;
 }
 
 .destino-nome {
@@ -51,7 +47,7 @@
 
 .descricao-card {
     padding: 10px;
-    font-size: 20px;
+    font-size: 14px;
     background-color: #eab741;
     color: #504d2c;
 }
@@ -64,8 +60,9 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: auto; 
+    display: block;
 }
-
 .btn.dashboard:hover {
     background-color: #504d2c;
     color: #eab741;
@@ -76,6 +73,4 @@
     cursor: pointer;
 }
 
-.card-destino:hover {
-    background-color: antiquewhite;
-}
+
