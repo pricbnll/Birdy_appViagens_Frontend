@@ -22,8 +22,8 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
     const [highlightedDestino, setHighlightedDestino] = useState(null);
 
     useEffect(() => {
-        if (selectedDestino && selectedDestino.coordenadas) {
-            const [lat, lon] = selectedDestino.coordenadas.split(",").map(Number);
+        if (selectedDestino && selectedDestino.coordenadas_geo) {
+            const [lat, lon] = selectedDestino.coordenadas_geo.split(",").map(Number);
             setPosition([lat, lon]);
             setZoom(zoomLevel);
             setHighlightedDestino(selectedDestino);
@@ -56,8 +56,8 @@ function MapaHome({ selectedDestino, destinos, zoomLevel }) {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
             />
             {destinos && destinos.map((destino) => {
-                if (destino.coordenadas) {
-                    const [lat, lon] = destino.coordenadas.split(",").map(Number);
+                if (destino.coordenadas_geo) {
+                    const [lat, lon] = destino.coordenadas_geo.split(",").map(Number);
                     return (
                         <Marker
                             key={destino.id}
