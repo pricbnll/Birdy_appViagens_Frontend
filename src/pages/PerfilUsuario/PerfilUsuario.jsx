@@ -43,15 +43,9 @@ function PerfilUsuario() {
     }
 }
 
-    const atualizarUsuario = async (data) => {
+    const atualizarUsuario = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/usuarios/${usuario.id}`, {
-                method: 'PUT',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+            const response = await api.put(`/usuarios/${usuario.id}`)
 
             if (response.ok) {
                 alert('Dados atualizados com sucesso!')
@@ -73,7 +67,9 @@ function PerfilUsuario() {
 
         if (confirmar) {
             try {
-                const locaisResponse = await fetch(`http://localhost:3000/destinos?usuarioId=${id}`)
+                const locaisResponse = await api.get(
+                    `/destinos/destinos_usuario/${usuario.id}`
+                  );
                 if (!locaisResponse.ok) {
                     throw new Error('Erro ao verificar locais cadastrados.')
                 }
@@ -85,14 +81,12 @@ function PerfilUsuario() {
                     return
                 }
 
-                const response = await fetch(`http://localhost:3000/usuarios/${id}`, {
-                    method: 'DELETE',
-                })
+                const response = await api.delete(`http://localhost:3000/usuarios/${id}`)
 
                 if (response.ok) {
                     alert('Sua conta foi excluída!')
-                    localStorage.removeItem('usuarioNome')
-                    localStorage.removeItem('usuarioId')
+                    localStorage.removeItem('usuario.nome')
+                    localStorage.removeItem('usuario.id')
                     navigate('/')
                 } else {
                     alert("Erro ao excluir o usuário.")

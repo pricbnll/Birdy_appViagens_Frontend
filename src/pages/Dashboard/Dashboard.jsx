@@ -17,16 +17,15 @@ function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token); 
+    console.log(token);
 
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     console.log(usuario);
 
-    setUsuario(usuario.nome)
+    setUsuario(usuario.nome);
 
     async function fetchData() {
       try {
-
         if (!usuario.id) {
           console.error("Usuário ID não encontrado");
           return;
@@ -35,12 +34,11 @@ function Dashboard() {
         const responseCountDestinos = await api.get(
           `/destinos/destinos_usuario/${usuario.id}`
         );
-        console.log(usuario.id)
+
         const totalDestinoIdData = responseCountDestinos.data;
         setCountDestinos(totalDestinoIdData.count);
-        console.log(totalDestinoIdData.count)
         setDestinos(totalDestinoIdData.rows);
-        console.log(totalDestinoIdData.rows)
+        
       } catch (error) {
         console.error("Erro ao buscar destinos:", error);
       }
