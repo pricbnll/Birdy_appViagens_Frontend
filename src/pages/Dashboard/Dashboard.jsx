@@ -15,8 +15,7 @@ function Dashboard() {
     const [zoomLevel, setZoomLevel] = useState(4);
     const [isMobileMapVisible, setIsMobileMapVisible] = useState(false);
     const [selectedDestinoForMap, setSelectedDestinoForMap] = useState(null);
-
-     const isMobile = useMediaQuery('(max-width: 768px)');
+    const isMobile = useMediaQuery('(max-width: 768px)')
 
     useEffect(() => {
         const usuarioNome = localStorage.getItem('usuarioNome');
@@ -59,6 +58,10 @@ function Dashboard() {
         setSelectedDestinoForMap(null);
     };
 
+    
+    const nomeCompleto = localStorage.getItem("usuarioNome");
+    const primeiroNome = nomeCompleto.split(" ")[0];
+
     return (
         <>
             <div className="dashboard-container">
@@ -68,6 +71,7 @@ function Dashboard() {
                         <div className="flex-column first-column">
                             <div className="titulo">
                                 <h2>Olá, {usuario.nome}! Bem-vindo!</h2>
+
                             </div>
                             <div className="card">
                                 Meus destinos

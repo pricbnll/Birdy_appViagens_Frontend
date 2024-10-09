@@ -22,7 +22,6 @@
     margin-bottom: 20px;
 }
 
-
 .hamburger-btn {
     display: none; 
     background: none;
@@ -41,12 +40,10 @@
     .nav-bg {
         transform: translateX(-100%);
     }
-
-    
+  
     .nav-bg.open {
         transform: translateX(0);
     }
-
    
     .menu-links {
         display: none;
@@ -57,8 +54,7 @@
         height: 100%;
         padding-top: 20px;
     }
-
-   
+  
     .menu-links.open {
         display: flex;
     }
