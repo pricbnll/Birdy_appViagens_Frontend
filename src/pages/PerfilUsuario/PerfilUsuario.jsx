@@ -27,7 +27,7 @@ function PerfilUsuario() {
         const responseCarregarUsuario = await api.get(`/usuarios/${id}`)
         // console.log(responseCarregarUsuario.data);
         if (responseCarregarUsuario.ok) {
-            const responseCarregarData = await responseCarregarUsuario.json()
+            const responseCarregarData = await responseCarregarUsuario.data
             setUsuario(responseCarregarData)
            
 
@@ -101,7 +101,7 @@ function PerfilUsuario() {
         <>
             <div className='flex-row'>
                 <Menu></Menu>
-                <div className="container-bg">
+                <div className="container-bg ml-200">
                     <h2 className='titulo'>Meu perfil</h2>
                     {usuario && (
                         <div className='flex-row'>

@@ -57,7 +57,7 @@ function ListaDestinos() {
     return (
         <>
             <Menu></Menu>
-            <div className="destinos-container">
+            <div className="destinos-container ">
                 <h2 className="titulo">Meus Destinos</h2>
                 {destinos.length > 0 ? (
                     <table className="tabela-destinos">
