@@ -2,32 +2,45 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Menu from '../../componentes/Menu/Menu'
 import '../ListaDestinos/ListaDestinos.css'
+import api from "../../services/ApiUrl";
 
 function ListaDestinos() {
+    const [usuario, setUsuario] = useState({
+        nome: "Nome do Viajante",
+        id: null,
+      });
     const [destinos, setDestinos] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
-        const usuarioId = localStorage.getItem('usuarioId')
+        const token = localStorage.getItem("token");
+        console.log(token);
+    
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        console.log(usuario);
+    
+        setUsuario(usuario.nome);
 
         const carregarDestinos = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/destinos?usuarioId=${usuarioId}`)
-                if (response.ok) {
-                    const data = await response.json()
-                    setDestinos(data);
-                } else {
-                    alert('Erro ao carregar os destinos.')
+                if (!usuario.id) {
+                    console.error("Usuário ID não encontrado");
+                    return;
+                  }
+                  const responseListaDestinos = await api.get(
+                    `/destinos/destinos_usuario/${usuario.id}`
+                  );
+          
+                  const totalDestinoIdData = responseListaDestinos.data;
+                  setDestinos(totalDestinoIdData.rows);
+                  
+                } catch (error) {
+                  console.error("Erro ao buscar destinos:", error);
                 }
-            } catch (error) {
-                alert('Erro ao carregar os destinos.')
-            }
-        }
-
-        if (usuarioId) {
-            carregarDestinos()
-        }
-    }, [])
+              }
+              carregarDestinos();
+            }, [usuario.id]);
+          
 
     const handleAlterar = (id) => {
         navigate(`/alterar-local/${id}`)
