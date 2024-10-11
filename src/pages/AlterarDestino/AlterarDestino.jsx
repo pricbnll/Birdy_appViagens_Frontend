@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import buscaCep from '../../util/buscaCep'
 import buscaCoordenadas from '../../util/buscaCoordenadas'
 import Menu from '../../componentes/Menu/Menu'
+import api from "../../services/ApiUrl";
 
 function AlterarDestino() {
     const { register, handleSubmit, setValue } = useForm()
@@ -20,9 +21,9 @@ function AlterarDestino() {
 
         const carregarDestino = async (id) => {
             try {
-                const response = await fetch(`http://localhost:3000/destinos/${id}`)
-                if (response.ok) {
-                    const data = await response.json()
+                const response = await api.get(`/destinos/${id}`)
+                if (response.status === 200) {
+                    const data = await response.data
                     setDestino(data)
                     setCep(data.cep || '')
 
@@ -49,15 +50,9 @@ function AlterarDestino() {
     const atualizarDestino = async (data) => {
         try {
             const destinoData = { ...data, usuarioId: usuario.id }
-            const response = await fetch(`http://localhost:3000/destinos/${id}`, {
-                method: 'PUT',
-                body: JSON.stringify(destinoData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+            const response = await api.put(`/destinos/${id}`, destinoData)
 
-            if (response.ok) {
+            if (response.status === 200) {
                 alert('Dados do destino atualizados com sucesso!')
                 navigate('/locais')
             } else {
@@ -88,7 +83,7 @@ function AlterarDestino() {
             <div className='flex-row'>
                 <Menu />
                 <div className="container-bg">
-                    <h2 className='titulo'>Alterar Local</h2>
+                    <h2 className='titulo'>Alterar destino</h2>
                     {destino && (
                         <div>
                             <form onSubmit={handleSubmit(atualizarDestino)}>
@@ -113,8 +108,8 @@ function AlterarDestino() {
                                     <div className='col-12'>
                                         <textarea
                                             className='input-area w-100 descricao-local'
-                                            placeholder='Descrição do local'
-                                            {...register('descricao', { required: 'Adicione uma descrição do local' })}
+                                            placeholder='Descrição do destino'
+                                            {...register('descricao', { required: 'Adicione uma descrição do destino' })}
                                         />
                                     </div>
                                 </div>
@@ -125,7 +120,7 @@ function AlterarDestino() {
                                             className='input-area w-100'
                                             type="text"
                                             placeholder='Coordenadas Geográficas'
-                                            {...register('coordenadas', { required: 'Informe a latitude e longitude do local.' })}
+                                            {...register('coordenadas_geo', { required: 'Informe a latitude e longitude do destino.' })}
                                             onBlur={onCoordenadasChange}
                                         />
                                     </div>

@@ -55,13 +55,14 @@ function CadastroUsuario() {
   return (
     <>
       <div className="flex-row">
-        <div className="position-fixed">
+        <div className="position-lateral">
           <img
+            style={{height: "-webkit-fill-available"}}
             src="../src/imgs/lateral.jpg"
             alt="Imagem lateral tela notebook com natureza sobreposta"
           />
         </div>
-        <div className="container-bg ml-500">
+        <div className="container-bg ml-0">
           <h2 className="titulo">Cadastre-se</h2>
           <div>
             <form onSubmit={handleSubmit(criarUsuario)}>

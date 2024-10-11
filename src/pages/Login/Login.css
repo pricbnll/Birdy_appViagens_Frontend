@@ -62,13 +62,6 @@
     background-color: #ce8326;
 }
 
-.flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
 .texto-link {
     text-decoration: none;
     color: #eab741;
