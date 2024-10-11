@@ -1,244 +1,191 @@
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import buscaCep from "../../util/buscaCep";
-import { useNavigate } from "react-router-dom";
-// import checkCpfUnico from "../../util/cpfUnico"
-// import checkEmailUnico from "../../util/emailUnico";
-import api from "../../services/ApiUrl"
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import buscaCep from '../../util/buscaCep'
+import buscaCoordenadas from '../../util/buscaCoordenadas'
+import Menu from '../../componentes/Menu/Menu'
+import api from "../../services/ApiUrl";
 
-function CadastroUsuario() {
-  const { register, handleSubmit, setValue, formState } = useForm();
-  const [cep, setCep] = useState("");
-  const navigate = useNavigate();
+function AlterarDestino() {
+    const { register, handleSubmit, setValue } = useForm()
+    const [cep, setCep] = useState('')
+    const [usuario, setUsuario] = useState({ nome: '', id: '' })
+    const [destino, setDestino] = useState(null)
+    const navigate = useNavigate()
+    const { id } = useParams()
 
-  const onCepChange = (e) => {
-    const cepValue = e.target.value.replace(/\D/g, "");
-    setCep(cepValue);
-    if (cepValue.length === 8) {
-      buscaCep(cepValue, setValue);
+    useEffect(() => {
+        const usuarioNome = localStorage.getItem('usuarioNome')
+        const usuarioId = localStorage.getItem('usuarioId')
+        setUsuario({ nome: usuarioNome, id: usuarioId })
+
+        const carregarDestino = async (id) => {
+            try {
+                const response = await api.get(`/destinos/${id}`)
+                if (response.status === 200) {
+                    const data = await response.data
+                    setDestino(data)
+                    setCep(data.cep || '')
+
+                    for (const key in data) {
+                        setValue(key, data[key])
+                    }
+                } else {
+                    alert('Erro ao carregar os dados do destino.')
+                }
+            } catch (error) {
+                alert('Erro ao carregar os dados do destino.')
+            }
+        }
+
+        if (id) {
+            carregarDestino(id)
+        }
+    }, [id, setValue])
+
+    const handleDashboard = () => {
+        navigate('/dashboard')
     }
-  };
 
-  const handleLogin = () => {
-    navigate("/");
-  };
+    const atualizarDestino = async (data) => {
+        try {
+            const destinoData = { ...data, usuarioId: usuario.id }
+            const response = await fetch(`http://localhost:3000/destinos/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(destinoData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
 
-  async function criarUsuario(data) {
-    try {
-      const response = await api.post("/usuarios", data);
-      console.log("Requisição enviada com sucesso!");
-      console.log(response.data);
-
-      if (response.status !== 201) {
-        alert("Erro ao cadastrar usuário.");
-      } else {
-        alert("Cadastro efetuado com sucesso!");
-        navigate("/Login");
-      }
-      // const cpfUnico = await checkCpfUnico(data.cpf);
-      // if (!cpfUnico) {
-      //   alert("Este CPF já foi cadastrado");
-      //   return;
-      // }
-
-      // const emailUnico = await checkEmailUnico(data.email);
-      // if (!emailUnico) {
-      //   alert("Este E-mail já foi cadastrado");
-      //   return;
-      // }
-    } catch (error) {
-      console.error("Erro no cadastro:", error);
-      alert("Erro no cadastro do usuário.");
+            if (response.ok) {
+                alert('Dados do destino atualizados com sucesso!')
+                navigate('/locais')
+            } else {
+                alert('Erro ao atualizar os dados do destino.')
+            }
+        } catch (error) {
+            alert('Erro ao atualizar os dados do destino.')
+        }
     }
-  }
 
-  return (
-    <>
-      <div className="flex-row">
-        <div className="position-fixed">
-          <img
-            src="../src/imgs/lateral.jpg"
-            alt="Imagem lateral tela notebook com natureza sobreposta"
-          />
-        </div>
-        <div className="container-bg ml-500">
-          <h2 className="titulo">Cadastre-se</h2>
-          <div>
-            <form onSubmit={handleSubmit(criarUsuario)}>
-              <div className="row mt-4">
-                <div className="col-12">
-                  <span className="error-message">
-                    {formState.errors?.nome?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Nome"
-                    {...register("nome", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-              </div>
+    const onCepChange = async (e) => {
+        const cepValue = e.target.value.replace(/\D/g, '')
+        setCep(cepValue)
+        if (cepValue.length === 8) {
+            await buscaCep(cepValue, setValue)
+        }
+    }
 
-              <div className="row mt-4">
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.sexo?.message}
-                  </span>
-                  <select
-                    className="input-area w-100"
-                    {...register("sexo", { required: "Campo Obrigatório" })}
-                  >
-                    <option value="">Sexo</option>
-                    <option value="feminino">Feminino</option>
-                    <option value="masculino">Masculino</option>
-                    <option value="na">Prefiro não informar</option>
-                  </select>
-                </div>
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.cpf?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="CPF"
-                    {...register("cpf", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.data_nascimento?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="date"
-                    placeholder="Data de Nascimento"
-                    {...register("data_nascimento", {
-                      required: "Campo Obrigatório",
-                    })}
-                  />
-                </div>
-              </div>
+    const onCoordenadasChange = async (e) => {
+        const coordenadasValue = e.target.value
+        if (coordenadasValue) {
+            await buscaCoordenadas(coordenadasValue, setValue)
+        }
+    }
 
-              <div className="row mt-4">
-                <div className="col-8">
-                  <span className="error-message">
-                    {formState.errors?.email?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="E-mail"
-                    {...register("email", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.password?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Senha"
-                    {...register("password", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-              </div>
+    return (
+        <>
+            <div className='flex-row'>
+                <Menu />
+                <div className="container-bg">
+                    <h2 className='titulo'>Alterar destino</h2>
+                    {destino && (
+                        <div>
+                            <form onSubmit={handleSubmit(atualizarDestino)}>
+                                <div className='row mt-4'>
+                                    <div className='col-12'>
+                                        <span>ID: {destino.id}</span>
+                                    </div>
+                                </div>
 
-              <div className="row mt-4">
-                <div className="col-3">
-                  <span className="error-message">
-                    {formState.errors?.cep?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="CEP"
-                    {...register("cep", { required: "Campo Obrigatório" })}
-                    value={cep}
-                    onChange={onCepChange}
-                  />
-                </div>
-                <div className="col-7">
-                  <span className="error-message">
-                    {formState.errors?.endereco?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Endereço"
-                    {...register("endereco", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-                <div className="col-2">
-                  <span className="error-message">
-                    {formState.errors?.numero?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Número"
-                    {...register("numero", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-              </div>
+                                <div className='row mt-4'>
+                                    <div className='col-12'>
+                                        <input
+                                            className='input-area w-100'
+                                            type="text"
+                                            placeholder='Nome'
+                                            {...register('nome', { required: 'Campo Obrigatório' })}
+                                        />
+                                    </div>
+                                </div>
 
-              <div className="row mt-4">
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.bairro?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Bairro"
-                    {...register("bairro", { required: "Campo Obrigatório" })}
-                  />
+                                <div className='row mt-4'>
+                                    <div className='col-12'>
+                                        <textarea
+                                            className='input-area w-100 descricao-local'
+                                            placeholder='Descrição do destino'
+                                            {...register('descricao', { required: 'Adicione uma descrição do destino' })}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className='row mt-4'>
+                                    <div className='col-4'>
+                                        <input
+                                            className='input-area w-100'
+                                            type="text"
+                                            placeholder='Coordenadas Geográficas'
+                                            {...register('coordenadas_geo', { required: 'Informe a latitude e longitude do destino.' })}
+                                            onBlur={onCoordenadasChange}
+                                        />
+                                    </div>
+                                    <div className='col-2'>
+                                        <input
+                                            className='input-area w-100'
+                                            type="text"
+                                            placeholder='CEP'
+                                            {...register('cep')}
+                                            value={cep}
+                                            onChange={onCepChange}
+                                        />
+                                    </div>
+                                    <div className='col-2'>
+                                        <input
+                                            className='input-area w-100'
+                                            type="text"
+                                            placeholder='Cidade'
+                                            {...register('cidade', { required: 'Campo Obrigatório' })}
+                                        />
+                                    </div>
+                                    <div className='col-2'>
+                                        <input
+                                            className='input-area w-100'
+                                            type="text"
+                                            placeholder='Estado'
+                                            {...register('estado', { required: 'Campo Obrigatório' })}
+                                        />
+                                    </div>
+                                    <div className='col-2'>
+                                        <input
+                                            className='input-area w-100'
+                                            type="text"
+                                            placeholder='País'
+                                            {...register('pais', { required: 'Campo Obrigatório' })}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className='row gap-5'>
+                                    <button
+                                        onClick={handleDashboard}
+                                        className='mt-5 btn-white btn-style w-50 col'
+                                        type='button'>
+                                        Cancelar
+                                    </button>
+                                    <button
+                                        className='mt-5 btn-yellow btn-style w-50 col'
+                                        type='submit'>
+                                        Atualizar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
                 </div>
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.cidade?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Cidade"
-                    {...register("cidade", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-                <div className="col-4">
-                  <span className="error-message">
-                    {formState.errors?.estado?.message}
-                  </span>
-                  <input
-                    className="input-area w-100"
-                    type="text"
-                    placeholder="Estado"
-                    {...register("estado", { required: "Campo Obrigatório" })}
-                  />
-                </div>
-              </div>
-              <div className="row gap-5">
-                <button
-                  onClick={handleLogin}
-                  className="mt-5 btn-white btn-style w-50 col"
-                  type="button"
-                >
-                  Cancelar
-                </button>
-                <button
-                  className="mt-5 btn-yellow btn-style w-50 col"
-                  type="submit"
-                >
-                  Cadastrar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+            </div>
+        </>
+    )
 }
 
-export default CadastroUsuario;
+export default AlterarDestino
