@@ -25,18 +25,18 @@ function PerfilUsuario() {
     const carregarUsuario = async (id) => {
     try {
         const responseCarregarUsuario = await api.get(`/usuarios/${id}`)
-        // console.log(responseCarregarUsuario.data);
-        if (responseCarregarUsuario.ok) {
-            const responseCarregarData = await responseCarregarUsuario.data
+        if (responseCarregarUsuario.status === 200) {
+            const responseCarregarData = responseCarregarUsuario.data
             setUsuario(responseCarregarData)
            
 
             for (const key in responseCarregarData) {
                 setValue(key, responseCarregarData[key])
                 console.log(key)
+            
             }
         } else {
-            alert('Erro ao carregar os dados do usuário.')
+            alert('Erro ao carregar o usuário.')
         }
     } catch (error) {
         alert('Erro ao carregar os dados do usuário.')
