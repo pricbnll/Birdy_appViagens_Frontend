@@ -47,22 +47,20 @@ function ListaDestinos() {
     }
 
     const handleExcluir = async (id) => {
-        const confirmar = window.confirm("Tem certeza que deseja excluir este local?")
+        const confirmar = window.confirm("Tem certeza que deseja excluir este destino?")
 
         if (confirmar) {
             try {
-                const response = await fetch(`http://localhost:3000/destinos/${id}`, {
-                    method: 'DELETE',
-                })
+                const response = await api.delete(`/destinos/${id}`)
 
-                if (response.ok) {
+                if (response.status === 200) {
                     setDestinos(destinos.filter(destino => destino.id !== id));
-                    alert("Local excluído com sucesso!")
+                    alert("destino excluído com sucesso!")
                 } else {
-                    alert("Erro ao excluir o local.")
+                    alert("Erro ao excluir o destino.")
                 }
             } catch (error) {
-                alert("Erro ao excluir o local.")
+                alert("Erro ao excluir o destino.")
             }
         }
     }
