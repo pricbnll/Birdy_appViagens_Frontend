@@ -42,16 +42,18 @@ function PerfilUsuario() {
 
   const atualizarUsuario = async (data) => {
     try {
-
-      console.log(data)
-      const responseAtualizarUsuario = await api.put(`/usuarios/${usuario.id}`, data);
+      console.log(data);
+      const responseAtualizarUsuario = await api.put(
+        `/usuarios/${usuario.id}`,
+        data
+      );
 
       if (responseAtualizarUsuario.status === 200) {
         const responseAtualizarData = responseAtualizarUsuario.data;
         setUsuario(responseAtualizarData);
-        
+
         alert("Dados atualizados com sucesso!");
-        
+
         navigate("/dashboard");
       } else {
         alert("Erro ao atualizar os dados do usuário.");
@@ -75,11 +77,11 @@ function PerfilUsuario() {
         const locaisResponse = await api.get(
           `/destinos/destinos_usuario/${usuario.id}`
         );
-        if (!locaisResponse.ok) {
+        if (!(locaisResponse.status === 200)) {
           throw new Error("Erro ao verificar locais cadastrados.");
         }
 
-        const locaisData = await locaisResponse.json();
+        const locaisData = locaisResponse.data;
 
         if (locaisData.length > 0) {
           alert(
@@ -88,14 +90,11 @@ function PerfilUsuario() {
           return;
         }
 
-        const response = await api.delete(
-          `http://localhost:3000/usuarios/${id}`
-        );
+        const response = await api.delete(`/usuarios/${id}`);
 
-        if (response.ok) {
+        if (response.status === 200) {
           alert("Sua conta foi excluída!");
-          localStorage.removeItem("usuario.nome");
-          localStorage.removeItem("usuario.id");
+          localStorage.removeItem("usuario");
           navigate("/");
         } else {
           alert("Erro ao excluir o usuário.");
