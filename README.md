@@ -8,6 +8,12 @@
 
   O nome 'Birdy' foi escolhido pensando na sensação de liberdade e aventura. 
 O aplicativo permitirá aos usuários explorar novos destinos e experiências, desfrutando da beleza e diversidade da natureza de forma leve, como um passarinho.🐦
+
+
+## Tela Login
+
+![image](./src/imgs/tela-login.png)
+
   
 ## 🏦 Módulo 1 - Projeto Avaliativo
 
@@ -105,17 +111,5 @@ Caso tenha alguma dúvida!!
 * Qualquer dúvida ou sugestão de melhorar o código eu aceito - algumas escrevi acima!!!
 
 
-## Tela Login
 
-![image](./src/imgs/tela-login.png)
-
-
-## Tela Cadastro
-
-![image](./src/imgs/tela-cadastro.png)
-
-
-## Tela Dashboard
-
-![image](./src/imgs/tela-dashboard.png)
 
