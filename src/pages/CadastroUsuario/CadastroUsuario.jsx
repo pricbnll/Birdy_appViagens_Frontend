@@ -62,7 +62,7 @@ function CadastroUsuario() {
             alt="Imagem lateral tela notebook com natureza sobreposta"
           />
         </div>
-        <div className="container-bg">
+        <div className="container-bg ml-0">
           <h2 className="titulo">Cadastre-se</h2>
           <div>
             <form onSubmit={handleSubmit(criarUsuario)}>
