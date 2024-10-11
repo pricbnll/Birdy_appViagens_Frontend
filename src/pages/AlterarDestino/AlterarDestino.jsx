@@ -50,15 +50,9 @@ function AlterarDestino() {
     const atualizarDestino = async (data) => {
         try {
             const destinoData = { ...data, usuarioId: usuario.id }
-            const response = await fetch(`http://localhost:3000/destinos/${id}`, {
-                method: 'PUT',
-                body: JSON.stringify(destinoData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+            const response = await api.put(`/destinos/${id}`, destinoData)
 
-            if (response.ok) {
+            if (response.status === 200) {
                 alert('Dados do destino atualizados com sucesso!')
                 navigate('/locais')
             } else {
