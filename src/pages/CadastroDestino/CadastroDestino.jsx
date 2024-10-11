@@ -7,7 +7,7 @@ import Menu from "../../componentes/Menu/Menu";
 import api from "../../services/ApiUrl";
 
 function CadastroDestino() {
-  const { register, handleSubmit, setValue, formState } = useForm();
+  const { register, handleSubmit, setValue, formState, watch } = useForm();
   const [cep, setCep] = useState("");
   const [usuario, setUsuario] = useState({ nome: "", id: "" });
   const navigate = useNavigate();
@@ -20,11 +20,12 @@ function CadastroDestino() {
     }
   };
 
+  const observedCep = watch("cep");
+
   useEffect(() => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (usuario) {
       setUsuario({ nome: usuario.nome, id: usuario.id });
-
     } else {
       console.error("Nenhum usuário encontrado no localStorage");
     }
@@ -43,17 +44,28 @@ function CadastroDestino() {
 
   async function criarDestino(data) {
     try {
-    //   const destinoData = { ...data, usuarioId: usuario.id };
-      const response = await api.post("/destinos", data)
+      const destinoData = { ...data, usuarioId: usuario.id };
 
-      if (response.status === false) {
-        alert("Erro ao cadastrar local.");
+      const response = await api.post("/destinos", {
+        nome: destinoData.nome,
+        descricao: destinoData.descricao,
+        coordenadas_geo: destinoData.coordenadas_geo,
+        cep: destinoData.cep || null,
+        cidade: destinoData.cidade,
+        estado: destinoData.estado,
+        pais: destinoData.pais,
+      });
+      console.log("Destino criado:", response.data);
+      
+      if (response.status !== 201) {
+        alert("Erro ao cadastrar destino.");
       } else {
         alert("Cadastro efetuado com sucesso!");
         navigate("/dashboard");
       }
     } catch (error) {
-      alert("Erro no cadastro do local. catch");
+      alert("Erro no cadastro do destino. catch");
+      console.error("Erro no cadastro do destino:", error);
     }
   }
 
@@ -62,7 +74,7 @@ function CadastroDestino() {
       <div className="flex-row">
         <Menu></Menu>
         <div className="container-bg">
-          <h2 className="titulo">Cadastro de Local</h2>
+          <h2 className="titulo">Novo destino</h2>
           <div>
             <form className="container" onSubmit={handleSubmit(criarDestino)}>
               <div className="row">
@@ -92,11 +104,11 @@ function CadastroDestino() {
                     {formState.errors?.descricao?.message}
                   </span>
                   <textarea
-                    className="input-area w-100 descricao-local"
+                    className="input-area w-100 descricao-destino"
                     type="text"
-                    placeholder="Descrição do local"
+                    placeholder="Descrição do destino"
                     {...register("descricao", {
-                      required: "Adicione uma descrição do local",
+                      required: "Adicione uma descrição do destino",
                     })}
                   />
                 </div>
@@ -105,14 +117,14 @@ function CadastroDestino() {
               <div className="row mt-3">
                 <div className="col-4">
                   <span className="error-message">
-                    {formState.errors?.coordenadas?.message}
+                    {formState.errors?.coordenadas_geo?.message}
                   </span>
                   <input
                     className="input-area w-100"
                     type="text"
                     placeholder="Coordenadas Geográficas"
-                    {...register("coordenadas", {
-                      required: "Informe a latitude e longitude do local.",
+                    {...register("coordenadas_geo", {
+                      required: "Informe a latitude e longitude do destino.",
                     })}
                     onBlur={onCoordenadasChange}
                   />
@@ -126,7 +138,7 @@ function CadastroDestino() {
                     type="text"
                     placeholder="CEP"
                     {...register("cep")}
-                    value={cep}
+                    value={observedCep || ""}
                     onChange={onCepChange}
                   />
                 </div>
