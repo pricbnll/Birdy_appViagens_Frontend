@@ -72,7 +72,7 @@ function Dashboard() {
                 <div className="flex-row justify-content-between">
                   <img
                     className="icon-card"
-                    src="../src/imgs/local-icon.png"
+                    src="../src/assets/local-icon.png"
                     alt="Icone Localização"
                   />
                   <span className="num-card">{countDestinos}</span>

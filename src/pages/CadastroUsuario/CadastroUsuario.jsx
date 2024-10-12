@@ -58,7 +58,7 @@ function CadastroUsuario() {
         <div className="position-lateral">
           <img
             style={{height: "-webkit-fill-available"}}
-            src="../src/imgs/lateral.jpg"
+            src="../src/assets/lateral.jpg"
             alt="Imagem lateral tela notebook com natureza sobreposta"
           />
         </div>

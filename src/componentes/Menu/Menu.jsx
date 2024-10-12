@@ -20,7 +20,7 @@ function Menu() {
         <>
             <nav className={`nav-bg ${isMenuOpen ? 'open' : ''}`}>
                 <div className="menu-header">
-                    <img className='logo-img' src="../src/imgs/birdy-icon.png" alt="Logo Birdy" />
+                    <img className='logo-img' src="../src/assets/birdy-icon.png" alt="Logo Birdy" />
                 </div>
                 <div className={`menu-links ${isMenuOpen ? 'open' : ''}`}>
                     <Link className='decor-none' to='/dashboard'>
