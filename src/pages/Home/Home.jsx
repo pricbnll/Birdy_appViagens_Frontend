@@ -45,7 +45,7 @@ function Home() {
           <div className="dash-fundo-logo">
             <img
               className="dash-logo-img"
-              src="../src/imgs/logo-birdy-branco.png"
+              src="../src/assets/logo-birdy-branco.png"
               alt="Logo Birdy"
             />
           </div>
@@ -66,7 +66,7 @@ function Home() {
               <h5 className="dash-card-title">Usuários</h5>
               <img
                 className="dash-icon-card"
-                src="../src/imgs/user-icon.png"
+                src="../src/assets/user-icon.png"
                 alt="Icon Usuário"
               />
               <span className="dash-num-card">{contUsuariosAtivos}</span>
@@ -77,7 +77,7 @@ function Home() {
               <h5 className="dash-card-title">Destinos</h5>
               <img
                 className="dash-icon-card"
-                src="../src/imgs/local-icon.png"
+                src="../src/assets/local-icon.png"
                 alt="Icon Destinos"
               />
               <span className="dash-num-card">{contDestinos}</span>
