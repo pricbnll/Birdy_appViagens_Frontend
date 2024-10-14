@@ -113,12 +113,7 @@ function PerfilUsuario() {
           <h2 className="titulo">Meu perfil</h2>
           {usuario && (
             <div className="flex-row">
-              <p>
-                <strong>ID:</strong> {usuario.id}{" "}
-              </p>
-              <p>
-                <strong>Viajante:</strong> {usuario.nome}
-              </p>
+                 ID: {usuario.id} {usuario.nome}
             </div>
           )}
           <div className="position-relative">
