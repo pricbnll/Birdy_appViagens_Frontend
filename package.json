@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview", 
-    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:migrate": "sequelize-cli db:migrate",
     "db:seed": "npx sequelize-cli db:seed:all",
     "start:with-migrations": "npm run db:migrate && npm run db:seed && npm run start"
   },
