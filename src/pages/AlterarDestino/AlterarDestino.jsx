@@ -107,7 +107,7 @@ function AlterarDestino() {
                                 <div className='row mt-4'>
                                     <div className='col-12'>
                                         <textarea
-                                            className='input-area w-100 descricao-local'
+                                            className='input-area w-100'
                                             placeholder='Descrição do destino'
                                             {...register('descricao', { required: 'Adicione uma descrição do destino' })}
                                         />

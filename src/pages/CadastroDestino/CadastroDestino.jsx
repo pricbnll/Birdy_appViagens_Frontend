@@ -104,7 +104,7 @@ function CadastroDestino() {
                     {formState.errors?.descricao?.message}
                   </span>
                   <textarea
-                    className="input-area w-100 descricao-destino"
+                    className="input-area w-100"
                     type="text"
                     placeholder="Descrição do destino"
                     {...register("descricao", {

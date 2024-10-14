@@ -24,6 +24,10 @@ input[type="date"] {
     padding-left: 10px;
 }
 
+textarea[type="text" i] {
+    height: 80px;
+}
+
 select.input-area {
     height: 32px;
     padding-left: 10px;
