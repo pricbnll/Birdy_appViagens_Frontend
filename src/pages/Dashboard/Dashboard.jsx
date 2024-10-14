@@ -25,6 +25,11 @@ function Dashboard() {
 
     setUsuario(usuario.nome);
 
+    // const latitude = local.endereco.latitude;
+    // const longitude = local.endereco.longitude;
+
+    // const googleMapsLink = `https://www.google.com/maps/?q=${latitude},${longitude}`;
+
     async function fetchData() {
       try {
         if (!usuario.id) {
@@ -97,6 +102,7 @@ function Dashboard() {
                 estado={destino.estado}
                 pais={destino.pais}
                 coordenadas={destino.coordenadas}
+                // GoogleMaps={googleMapsLink}
                 onMouseEnter={() => handleMouseEnter(destino)}
                 onClick={() => handleCardClick(destino)}
               />
