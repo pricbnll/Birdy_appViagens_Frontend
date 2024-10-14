@@ -100,7 +100,7 @@ function PerfilUsuario() {
           alert("Erro ao excluir o usuário.");
         }
       } catch (error) {
-        alert("Erro ao excluir o usuário catch.");
+        alert("Erro ao excluir o usuário, usuario possui destino!.");
       }
     }
   };
