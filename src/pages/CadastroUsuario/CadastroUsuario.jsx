@@ -89,7 +89,7 @@ function CadastroUsuario() {
                     className="input-area w-100"
                     {...register("sexo", { required: "Campo Obrigatório" })}
                   >
-                    <option value="">Sexo</option>
+                    <option value="">Gênero</option>
                     <option value="feminino">Feminino</option>
                     <option value="masculino">Masculino</option>
                     <option value="na">Prefiro não informar</option>
