@@ -23,7 +23,8 @@ function Dashboard() {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     console.log(usuario);
 
-    setUsuario(usuario.nome);
+    setUsuario({ nome: usuario.nome, id: usuario.id });
+
 
     // const latitude = local.endereco.latitude;
     // const longitude = local.endereco.longitude;
@@ -70,7 +71,8 @@ function Dashboard() {
           <div className="flex-row first-row">
             <div className="flex-column first-column">
               <div className="titulo">
-                <h2>Olá, Viajante! Bem-vindo(a) ao Birdy!</h2>
+                <h2>Bem-vindo(a) ao Birdy!</h2>
+                ID: {usuario.id} {usuario.nome}
               </div>
               <div className="card">
                 Destinos
