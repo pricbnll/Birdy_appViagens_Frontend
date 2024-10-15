@@ -75,9 +75,43 @@ Caso tenha alguma dúvida!!
   
 ## 🔪 Validações importantes
 
-- O número de CPF e endereço de email sempre deveram ser únicos, não podendo cadastrar mais de uma pessoa a mesma informação.
+Dashboard (página pública):
+Página inicial (principal), exibindo uma visão geral dos locais de visitação em viagens cadastrados.
+Uso de cards para trazer a quantidade de usuários ativos, número total de locais cadastrados e se for usar o mapa, colocar nesta página.
+Listagem dos locais de visitação em viagens em forma de lista ou de cards sem as opções de editar e excluir.
+A lista de locais de visitação em viagens deve ser recebida via integração com o back-end e deve carregar sempre que a página carregar.
 
-- 
+Login (página pública):
+Acesso às páginas privadas do sistema.
+
+Cadastro de Usuários (página pública):
+Na tela de login terá o botão de login e o de cadastrar, que quando clicado permite se cadastrar como novo usuário.
+Os usuários precisam fornecer: 
+Nome
+Sexo
+CPF
+Data de Nascimento
+E-mail
+Senha
+Endereço (usar ViaCEP)
+Logradouro, número, bairro, cidade, estado, CEP e complemento.
+Para usar o ViaCEP, deve ser utilizado a API disponível em https://viacep.com.br/
+
+Cadastro de Local de visitação em viagens (página privada):
+Cada usuário poderá cadastrar um ou mais local(is) de visitação em viagens, fornecendo:
+Nome do local
+Descrição do local
+Identificador do Usuário
+Localização
+Usar ViaCEP para o endereço
+Adicionar coordenadas geográficas (longitude e latitude)
+opcional: O usuário deve ser capaz de resgatar o link do Google Maps apontando para o local cadastrado.
+
+Listagem de Locais de visitação em viagens (página privada):
+Tela para listar os locais, com botões para acessar, editar (vai para a tela de cadastro preenchida) e deletar um local.
+Cada usuário só poderá excluir ou editar os locais de visitação em viagens cadastrados por ele.
+A lista de locais de visitação em viagens deve ser recebida via integração com o back-end e deve carregar sempre que a página carregar.
+
 
   
 ## 🛠️ Construído com
