@@ -28,6 +28,10 @@ textarea[type="text" i] {
     height: 80px;
 }
 
+textarea.input-area {
+    height: 80px;
+}
+
 select.input-area {
     height: 32px;
     padding-left: 10px;

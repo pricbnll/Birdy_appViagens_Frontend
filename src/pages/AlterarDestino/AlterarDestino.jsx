@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import buscaCep from '../../util/buscaCep'
 import buscaCoordenadas from '../../util/buscaCoordenadas'
 import Menu from '../../componentes/Menu/Menu'
+import "../AlterarDestino/AlterarDestino.css"
 import api from "../../services/ApiUrl";
 
 function AlterarDestino() {
@@ -80,9 +81,9 @@ function AlterarDestino() {
 
     return (
         <>
-            <div className='flex-row'>
+            <div className='destinos-container'>
                 <Menu />
-                <div className="container-bg">
+                <div className="tabela-destinos">
                     <h2 className='titulo'>Alterar destino</h2>
                     {destino && (
                         <div>
