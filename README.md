@@ -85,7 +85,7 @@ Caso tenha alguma dúvida!!
 - Trello - todos os passos que fiz para criar, roteiro da aplicação, regras de negócios e validações exigidas
 
 <p>
-    <img src="" />
+    <img src="./src/assets/Captura de Tela 2024-10-14 às 21.47.51.png" />
 </p>
 
 - VsCode - para formar o código em Node.js
