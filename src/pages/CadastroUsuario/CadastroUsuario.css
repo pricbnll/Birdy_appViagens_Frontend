@@ -1,0 +1,36 @@
+@media (max-width: 768px) {
+* {
+  margin: 0;
+}
+  .container-bg {
+    width: 100vw;
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .row {
+    align-items: stretch;
+    margin-right: 0;
+  }
+
+  .row.mt-4 .col-4,
+  .row.mt-4 .col-2 {
+    flex: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .row.gap-5 button {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  .btn-style {
+    width: 100%;
+  }
+
+  .position-lateral {
+    display: none;
+  }
+}

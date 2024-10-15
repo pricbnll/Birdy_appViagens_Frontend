@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import buscaCep from "../../util/buscaCep";
 import { useNavigate } from "react-router-dom";
+import "../CadastroUsuario/CadastroUsuario.css"
 // import checkCpfUnico from "../../util/cpfUnico"
 // import checkEmailUnico from "../../util/emailUnico";
 import api from "../../services/ApiUrl"
@@ -55,13 +56,14 @@ function CadastroUsuario() {
   return (
     <>
       <div className="flex-row">
-        <div className="position-fixed">
+        <div className="position-lateral">
           <img
-            src="../src/imgs/lateral.jpg"
+            style={{height: "-webkit-fill-available"}}
+            src="../src/assets/lateral.jpg"
             alt="Imagem lateral tela notebook com natureza sobreposta"
           />
         </div>
-        <div className="container-bg ml-500">
+        <div className="container-bg ml-0">
           <h2 className="titulo">Cadastre-se</h2>
           <div>
             <form onSubmit={handleSubmit(criarUsuario)}>
@@ -88,7 +90,7 @@ function CadastroUsuario() {
                     className="input-area w-100"
                     {...register("sexo", { required: "Campo Obrigatório" })}
                   >
-                    <option value="">Sexo</option>
+                    <option value="">Gênero</option>
                     <option value="feminino">Feminino</option>
                     <option value="masculino">Masculino</option>
                     <option value="na">Prefiro não informar</option>

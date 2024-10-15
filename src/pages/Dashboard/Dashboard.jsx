@@ -23,7 +23,13 @@ function Dashboard() {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     console.log(usuario);
 
-    setUsuario(usuario.nome);
+    setUsuario({ nome: usuario.nome, id: usuario.id });
+
+
+    // const latitude = local.endereco.latitude;
+    // const longitude = local.endereco.longitude;
+
+    // const googleMapsLink = `https://www.google.com/maps/?q=${latitude},${longitude}`;
 
     async function fetchData() {
       try {
@@ -65,14 +71,15 @@ function Dashboard() {
           <div className="flex-row first-row">
             <div className="flex-column first-column">
               <div className="titulo">
-                <h2>Olá, Viajante! Bem-vindo(a) ao Birdy!</h2>
+                <h2>Bem-vindo(a) ao Birdy!</h2>
+                ID: {usuario.id} {usuario.nome}
               </div>
               <div className="card">
                 Destinos
                 <div className="flex-row justify-content-between">
                   <img
                     className="icon-card"
-                    src="../src/imgs/local-icon.png"
+                    src="../src/assets/local-icon.png"
                     alt="Icone Localização"
                   />
                   <span className="num-card">{countDestinos}</span>
@@ -97,6 +104,7 @@ function Dashboard() {
                 estado={destino.estado}
                 pais={destino.pais}
                 coordenadas={destino.coordenadas}
+                // GoogleMaps={googleMapsLink}
                 onMouseEnter={() => handleMouseEnter(destino)}
                 onClick={() => handleCardClick(destino)}
               />
