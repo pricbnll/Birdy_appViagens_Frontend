@@ -83,6 +83,7 @@ function ListaDestinos() {
                         <tbody>
                             {destinos.map((destino) => (
                                 <tr key={destino.id}>
+                                    
                                     <td>{destino.nome}</td>
                                     <td>{destino.cidade}</td>
                                     <td>{destino.estado}</td>
