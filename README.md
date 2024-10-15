@@ -135,7 +135,15 @@ A lista de locais de visitação em viagens deve ser recebida via integração c
 
 ## 👀 Melhorias
 
-- 
+- Ao logout deve retirar os dados usuário do localStorage
+ -logar através de mídias sociais - tela login 
+ -colocar foto na dashboard publica - requisitar pela base de dados
+ - quando dar enter passar para o proximo input no cadastro usuario
+ - Aumentar zoom quando clicar em "exibir Mapa"
+ - Utilizar o Hook personalizado  de abrir mapa, ao clicar no exibir mapa no layout responsivo da Home responsivo
+ - OU retirar bcrypt ou saber como descriptografar para o usuario poder atualizar mas nao aparecer toda string criptografada. --- posso colocar ****
+ - trocar nominatim por awesome api e buscar coordenadas pelo cep
+ - FAZER DEPLOY FUNCIONAR
 
 ## 🎁 Expressões de gratidão
 
