@@ -12,7 +12,7 @@ O aplicativo permitirá aos usuários explorar novos destinos e experiências, d
 
 ## Tela Login
 
-![image](./src/imgs/tela-login.png)
+![image](./src/assets/tela-login.png)
 
   
 ## 🏦 Módulo 1 - Projeto Avaliativo
@@ -28,7 +28,7 @@ Seguindo um roteiro e aplicando as regras de negócio e rotas/telas que devem se
 
   ## 📉 Diagrama telas
 
-  <img src = "" alt="figma"/>
+  <img src = "../M3P-FrontEnd-Pri/src//assets/Diagrama de telas.png" alt="Diagrama telas"/>
 
 ## 🤖 Como rodar o repositório:
 
