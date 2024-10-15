@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import buscaCep from "../../util/buscaCep";
 import { useNavigate } from "react-router-dom";
+import "../CadastroUsuario/CadastroUsuario.css"
 // import checkCpfUnico from "../../util/cpfUnico"
 // import checkEmailUnico from "../../util/emailUnico";
 import api from "../../services/ApiUrl"
